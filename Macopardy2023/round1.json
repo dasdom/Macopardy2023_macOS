@@ -1,0 +1,105 @@
+{
+  "name": "Round One",
+  "categories": [
+    {
+      "name": "Lorem",
+      "levels": [
+        {
+          "value": 23,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 42,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 65,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 107,
+          "answer": "Answer",
+          "question": "Question?"
+        }
+      ]
+    },
+    {
+      "name": "Ipsum",
+      "levels": [
+        {
+          "value": 23,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 42,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 65,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 107,
+          "answer": "Answer",
+          "question": "Question?"
+        }
+      ]
+    },
+    {
+      "name": "Dolor",
+      "levels": [
+        {
+          "value": 23,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 42,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 65,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 107,
+          "answer": "Answer",
+          "question": "Question?"
+        }
+      ]
+    },
+    {
+      "name": "Sit",
+      "levels": [
+        {
+          "value": 23,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 42,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 65,
+          "answer": "Answer",
+          "question": "Question?"
+        },
+        {
+          "value": 107,
+          "answer": "Answer",
+          "question": "Question?"
+        }
+      ]
+    }
+  ]
+}

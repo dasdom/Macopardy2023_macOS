@@ -2,61 +2,33 @@
 //  
 //
 
-
 #import "GameViewController.h"
+#import "DDHGameView.h"
+#import "DDHJSONLoader.h"
+#import "DDHRound.h"
+#import "DDHLevel.h"
+#import "DDHBoardScene.h"
+
+@interface GameViewController ()
+@property (nonatomic, strong) DDHRound *round;
+@end
 
 @implementation GameViewController
 
-- (void)viewDidLoad
-{
+- (void)loadView {
+    DDHGameView *contentView = [[DDHGameView alloc] initWithFrame:NSMakeRect(0, 0, 500, 400)];
+    [self setView:contentView];
+}
+
+- (DDHGameView *)contentView {
+    return (DDHGameView *)[self view];
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-    // create a new scene
-    SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/ship.scn"];
-    
-    // create and add a camera to the scene
-    SCNNode *cameraNode = [SCNNode node];
-    cameraNode.camera = [SCNCamera camera];
-    [scene.rootNode addChildNode:cameraNode];
-    
-    // place the camera
-    cameraNode.position = SCNVector3Make(0, 0, 15);
-    
-    // create and add a light to the scene
-    SCNNode *lightNode = [SCNNode node];
-    lightNode.light = [SCNLight light];
-    lightNode.light.type = SCNLightTypeOmni;
-    lightNode.position = SCNVector3Make(0, 10, 10);
-    [scene.rootNode addChildNode:lightNode];
-    
-    // create and add an ambient light to the scene
-    SCNNode *ambientLightNode = [SCNNode node];
-    ambientLightNode.light = [SCNLight light];
-    ambientLightNode.light.type = SCNLightTypeAmbient;
-    ambientLightNode.light.color = [NSColor darkGrayColor];
-    [scene.rootNode addChildNode:ambientLightNode];
-    
-    // retrieve the ship node
-    SCNNode *ship = [scene.rootNode childNodeWithName:@"ship" recursively:YES];
-    
-    // animate the 3d object
-    [ship runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:2 z:0 duration:1]]];
-    
-    // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
-    
-    // set the scene to the view
-    scnView.scene = scene;
-    
-    // allows the user to manipulate the camera
-    scnView.allowsCameraControl = YES;
-    
-    // show statistics such as fps and timing information
-    scnView.showsStatistics = YES;
-    
-    // configure the view
-    scnView.backgroundColor = [NSColor blackColor];
-    
+
     // Add a click gesture recognizer
     NSClickGestureRecognizer *clickGesture = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     NSMutableArray *gestureRecognizers = [NSMutableArray array];
@@ -65,40 +37,94 @@
     scnView.gestureRecognizers = gestureRecognizers;
 }
 
+- (void)viewDidAppear {
+
+    DDHGameView *gameView = (DDHGameView *)self.view;
+
+    DDHRound *round = [DDHJSONLoader loadRound:1 playerNames:@[@"One", @"Two", @"Three", @"Nobody"]];
+    [gameView showBoardForRound:round];
+    [self setRound:round];
+}
+
 - (void)handleTap:(NSGestureRecognizer *)gestureRecognizer {
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
     
     // check what nodes are tapped
-    CGPoint p = [gestureRecognizer locationInView:scnView];
-    NSArray *hitResults = [scnView hitTest:p options:nil];
-    
-    // check that we clicked on at least one object
+    CGPoint point = [gestureRecognizer locationInView:scnView];
+    NSNumber *bitmask = [NSNumber numberWithInt:1 << 2];
+    NSArray *hitResults = [scnView hitTest:point options:@{SCNHitTestOptionCategoryBitMask: bitmask}];
+
+    DDHRound *round = [self round];
+
     if ([hitResults count] > 0) {
-        // retrieved the first clicked object
         SCNHitTestResult *result = [hitResults objectAtIndex:0];
-        
-        // get its material
-        SCNMaterial *material = result.node.geometry.firstMaterial;
-        
-        // highlight it
-        [SCNTransaction begin];
-        [SCNTransaction setAnimationDuration:0.5];
-        
-        // on completion - unhighlight
-        [SCNTransaction setCompletionBlock:^{
-            [SCNTransaction begin];
-            [SCNTransaction setAnimationDuration:0.5];
-            
-            material.emission.contents = [NSColor blackColor];
-            
-            [SCNTransaction commit];
-        }];
-        
-        material.emission.contents = [NSColor redColor];
-        
-        [SCNTransaction commit];
+        [self handleLevelTapWithHitTestResult:result round:round];
+        return;
     }
+
+    bitmask = [NSNumber numberWithInt:1 << 3];
+    hitResults = [scnView hitTest:point options:@{SCNHitTestOptionCategoryBitMask: bitmask}];
+
+    if ([hitResults count] > 0) {
+        SCNHitTestResult *result = [hitResults objectAtIndex:0];
+        [self handlePlayerTapWithHitTestResult:result round:round];
+    }
+}
+
+- (void)handleLevelTapWithHitTestResult:(SCNHitTestResult *)hitTestResult round:(DDHRound *)round {
+
+    SCNNode *node = [hitTestResult node];
+
+    if (node == nil) {
+        return;
+    }
+    // get its material
+
+    NSString *name = [node name];
+    NSLog(@"node: %@", name);
+    if ([[round playedLevel] containsObject:name]) {
+        return;
+    }
+
+    DDHLevel *level = [round levelForName:name];
+
+    NSLog(@"Answer: %@", [level answer]);
+
+    DDHGameView *gameView = [self contentView];
+    DDHBoardScene *boardScene = [gameView boardScene];
+    if ([node scale].x < 2) {
+        [boardScene showAnswerForNode:node level:level];
+    } else if ([node eulerAngles].y < 0.001) {
+        [boardScene showQuestionForNode:node level:level];
+    }
+}
+
+- (void)handlePlayerTapWithHitTestResult:(SCNHitTestResult *)hitTestResult round:(DDHRound *)round {
+    SCNNode *playerNode = [hitTestResult node];
+
+    if (playerNode == nil) {
+        return;
+    }
+    DDHGameView *gameView = [self contentView];
+    DDHBoardScene *boardScene = [gameView boardScene];
+    if ([boardScene shownNode] == nil) {
+        return;
+    }
+
+    NSString *playerName = [playerNode name];
+    NSLog(@"node: %@", playerName);
+
+    NSString *nameOfShownNode = [[boardScene shownNode] name];
+
+    DDHLevel *level = [round levelForName:nameOfShownNode];
+    [level setPlayerName:playerName];
+
+    DDHPlayer *player = [round playerForName:playerName];
+
+    [boardScene updateColorOfShownNodeForPlayer:player andResetLevel:level];
+
+    [boardScene updatePlayerNodesWithRound:round];
 }
 
 @end
