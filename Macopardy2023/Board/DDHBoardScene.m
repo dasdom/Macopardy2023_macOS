@@ -282,4 +282,15 @@
     [self updatePlayerNode:openPointsNode withPoints:points];
 }
 
+- (NSColor *)colorForPlayerName:(NSString *)name round:(DDHRound *)round {
+    __block NSInteger index = -1;
+    [[round players] enumerateObjectsUsingBlock:^(DDHPlayer * _Nonnull player, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([[player name] isEqualToString:name]) {
+            index = idx;
+            *stop = YES;
+        }
+    }];
+    return [DDHPlayer colorForNumber:index];
+}
+
 @end

@@ -20,5 +20,6 @@
 - (void)updateColorOfShownNodeForPlayer:(DDHPlayer *)player andResetLevel:(DDHLevel *)level;
 - (void)resetShownNodeWithLevel:(DDHLevel *)level;
 - (void)updatePlayerNodesWithRound:(DDHRound *)round;
+- (NSColor *)colorForPlayerName:(NSString *)name round:(DDHRound *)round;
 @end
 

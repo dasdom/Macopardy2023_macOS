@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DDHGameView : SCNView
+@property (nonatomic, strong) NSButton *connectButton;
 - (void)showBoardForRound:(DDHRound *)round;
 - (DDHBoardScene *)boardScene;
 @end

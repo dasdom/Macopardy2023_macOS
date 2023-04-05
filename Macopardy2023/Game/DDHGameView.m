@@ -4,13 +4,14 @@
 
 #import "DDHGameView.h"
 #import "DDHBoardScene.h"
+#import "DDHStartScene.h"
 #import <SpriteKit/SpriteKit.h>
 
 @implementation DDHGameView
 
-- (instancetype)init {
-    if (self = [super init]) {
-        [self setScene:[[SCNScene alloc] init]];
+- (instancetype)initWithFrame:(NSRect)frameRect {
+    if (self = [super initWithFrame:frameRect]) {
+        [self setScene:[[DDHStartScene alloc] init]];
     }
     return self;
 }

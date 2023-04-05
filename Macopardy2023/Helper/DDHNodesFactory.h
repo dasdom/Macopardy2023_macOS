@@ -8,6 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DDHNodesFactory : NSObject
 + (CGSize)boxSize;
++ (SCNNode *)roundSelectionNodeWithText:(NSString *)text;
 + (SCNNode *)answerBox:(NSString *)text categoryIndex:(NSInteger)categoryIndex levelIndex:(NSInteger)levelIndex;
 + (NSString *)nodeNameForCategoryIndex:(NSInteger)categoryIndex levelIndex:(NSInteger)levelIndex;
 + (SCNNode *)categoryName:(NSString *)name;

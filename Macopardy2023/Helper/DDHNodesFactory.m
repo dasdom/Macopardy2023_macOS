@@ -14,6 +14,32 @@
   return [SCNBox boxWithWidth:size.width height:size.height length:length chamferRadius:length * 0.1];
 }
 
++ (SCNNode *)roundSelectionNodeWithText:(NSString *)text {
+    SCNMaterial *material = [[SCNMaterial alloc] init];
+    [[material diffuse] setContents:[NSColor colorWithHue:0.1 saturation:0.4 brightness:0.4 alpha:1]];
+
+    CGSize boxSize = [self boxSize];
+    CGFloat length = 5;
+    SCNGeometry *geometry = [self boxGeometryWithSize:boxSize length:length];
+    [geometry setMaterials:@[material]];
+
+    SCNText *textGeometry = [SCNText textWithString:text extrusionDepth:length/3];
+    //  [textGeometry setFont:[UIFont systemFontOfSize: 0.8]];
+    [textGeometry setFlatness:0.1];
+    [textGeometry setAlignmentMode:@"center"];
+
+    SCNNode *textNode = [SCNNode nodeWithGeometry:textGeometry];
+    [textNode setPosition:SCNVector3Make(0, 0, length/2)];
+    [textNode setScale:SCNVector3Make(0.1, 0.1, 0.1)];
+    [self center:textNode];
+
+    SCNNode *node = [SCNNode nodeWithGeometry:geometry];
+    [node setCategoryBitMask:1 << 1];
+    [node addChildNode:textNode];
+
+    return node;
+}
+
 + (SCNNode *)answerBox:(NSString *)text categoryIndex:(NSInteger)categoryIndex levelIndex:(NSInteger)levelIndex {
   SCNMaterial *material = [[SCNMaterial alloc] init];
   [[material diffuse] setContents:[NSColor colorWithHue:0.1 saturation:0.4 brightness:0.4 alpha:1]];
