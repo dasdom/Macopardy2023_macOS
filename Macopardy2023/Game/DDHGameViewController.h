@@ -2,9 +2,8 @@
 //  
 //
 
-
 #import <SceneKit/SceneKit.h>
 
-@interface GameViewController : NSViewController
+@interface DDHGameViewController : NSViewController
 
 @end

@@ -4,7 +4,7 @@
 
 @import MultipeerConnectivity;
 
-#import "GameViewController.h"
+#import "DDHGameViewController.h"
 #import "DDHGameView.h"
 #import "DDHJSONLoader.h"
 #import "DDHRound.h"
@@ -13,7 +13,7 @@
 
 static NSString * const BuzzerServiceType = @"macopardy-buz";
 
-@interface GameViewController () <MCNearbyServiceAdvertiserDelegate, MCSessionDelegate>
+@interface DDHGameViewController () <MCNearbyServiceAdvertiserDelegate, MCSessionDelegate>
 @property (nonatomic, strong) DDHRound *round;
 @property (nonatomic, strong) MCPeerID *localPeerID;
 @property (nonatomic, strong) MCSession *session;
@@ -22,7 +22,7 @@ static NSString * const BuzzerServiceType = @"macopardy-buz";
 @property (nonatomic, strong) NSString *buzzedPlayerName;
 @end
 
-@implementation GameViewController
+@implementation DDHGameViewController
 
 - (void)loadView {
     DDHGameView *contentView = [[DDHGameView alloc] initWithFrame:NSMakeRect(0, 0, 500, 400)];

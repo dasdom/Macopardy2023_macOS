@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		F20D96EA29DB2653006F96F6 /* DDHStartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = F20D96E929DB2653006F96F6 /* DDHStartScene.m */; };
 		F20D971529DC0A38006F96F6 /* PeerConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F20D971429DC0A38006F96F6 /* PeerConnector.m */; };
+		F20D971E29DDF7EE006F96F6 /* DDHRoundsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20D971D29DDF7EE006F96F6 /* DDHRoundsViewController.m */; };
 		F2806DD529DAA6E800258711 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2806DD429DAA6E800258711 /* AppDelegate.m */; };
-		F2806DD829DAA6E800258711 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2806DD729DAA6E800258711 /* GameViewController.m */; };
+		F2806DD829DAA6E800258711 /* DDHGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2806DD729DAA6E800258711 /* DDHGameViewController.m */; };
 		F2806DDC29DAA6E900258711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2806DDB29DAA6E900258711 /* Assets.xcassets */; };
 		F2806DE129DAA6E900258711 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2806DE029DAA6E900258711 /* main.m */; };
 		F2806DEA29DAA71000258711 /* DDHGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2806DE929DAA71000258711 /* DDHGameView.m */; };
@@ -29,11 +30,13 @@
 		F20D96E929DB2653006F96F6 /* DDHStartScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDHStartScene.m; sourceTree = "<group>"; };
 		F20D971329DC0A38006F96F6 /* PeerConnector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeerConnector.h; sourceTree = "<group>"; };
 		F20D971429DC0A38006F96F6 /* PeerConnector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeerConnector.m; sourceTree = "<group>"; };
+		F20D971C29DDF7EE006F96F6 /* DDHRoundsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHRoundsViewController.h; sourceTree = "<group>"; };
+		F20D971D29DDF7EE006F96F6 /* DDHRoundsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDHRoundsViewController.m; sourceTree = "<group>"; };
 		F2806DD029DAA6E800258711 /* Macopardy2023.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macopardy2023.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2806DD329DAA6E800258711 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F2806DD429DAA6E800258711 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F2806DD629DAA6E800258711 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		F2806DD729DAA6E800258711 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		F2806DD629DAA6E800258711 /* DDHGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHGameViewController.h; sourceTree = "<group>"; };
+		F2806DD729DAA6E800258711 /* DDHGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDHGameViewController.m; sourceTree = "<group>"; };
 		F2806DDB29DAA6E900258711 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2806DE029DAA6E900258711 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F2806DE229DAA6E900258711 /* Macopardy2023.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Macopardy2023.entitlements; sourceTree = "<group>"; };
@@ -88,8 +91,8 @@
 		F20D96EC29DB27A9006F96F6 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				F2806DD629DAA6E800258711 /* GameViewController.h */,
-				F2806DD729DAA6E800258711 /* GameViewController.m */,
+				F2806DD629DAA6E800258711 /* DDHGameViewController.h */,
+				F2806DD729DAA6E800258711 /* DDHGameViewController.m */,
 				F2806DE829DAA71000258711 /* DDHGameView.h */,
 				F2806DE929DAA71000258711 /* DDHGameView.m */,
 			);
@@ -130,6 +133,8 @@
 			children = (
 				F2806DD329DAA6E800258711 /* AppDelegate.h */,
 				F2806DD429DAA6E800258711 /* AppDelegate.m */,
+				F20D971C29DDF7EE006F96F6 /* DDHRoundsViewController.h */,
+				F20D971D29DDF7EE006F96F6 /* DDHRoundsViewController.m */,
 				F20D96EC29DB27A9006F96F6 /* Game */,
 				F20D96EB29DB267F006F96F6 /* Start */,
 				F20D96E729DB25FA006F96F6 /* Board */,
@@ -230,9 +235,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2806E0E29DAC2E700258711 /* DDHRound.m in Sources */,
-				F2806DD829DAA6E800258711 /* GameViewController.m in Sources */,
+				F2806DD829DAA6E800258711 /* DDHGameViewController.m in Sources */,
 				F2806DEA29DAA71000258711 /* DDHGameView.m in Sources */,
 				F20D971529DC0A38006F96F6 /* PeerConnector.m in Sources */,
+				F20D971E29DDF7EE006F96F6 /* DDHRoundsViewController.m in Sources */,
 				F2806E0529DAC12C00258711 /* DDHBoardScene.m in Sources */,
 				F2806E0D29DAC2E700258711 /* DDHJSONLoader.m in Sources */,
 				F2806E0629DAC12C00258711 /* DDHNodesFactory.m in Sources */,

@@ -3,7 +3,7 @@
 //
 
 #import "AppDelegate.h"
-#import "GameViewController.h"
+#import "DDHGameViewController.h"
 
 @interface AppDelegate ()
 @property (strong) NSWindow *window;
@@ -12,7 +12,7 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    GameViewController *gameViewController = [[GameViewController alloc] init];
+    DDHGameViewController *gameViewController = [[DDHGameViewController alloc] init];
     gameViewController.title = @"Macopardy";
     
     NSWindow *window = [NSWindow windowWithContentViewController:gameViewController];
